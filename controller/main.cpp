@@ -1,5 +1,7 @@
 #include <iostream>
-#include "../modele/Player.h"
+#include <QApplication>
+
+#include "../model/Player.h"
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
