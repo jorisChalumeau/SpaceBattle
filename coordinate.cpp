@@ -1,6 +1,7 @@
 #include "coordinate.h"
 
-Coordinate::Coordinate()
-{
-
+Coordinate::Coordinate(Coord h, Coord v) {
+    hCoord = h;
+    vCoord = v;
+    value = UNKNOWN;
 }

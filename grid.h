@@ -6,7 +6,7 @@
 class Grid
 {
 public:
-    explicit Grid();
+    Grid();
     Coordinate _table[10][10];
     void display();
     ~Grid();

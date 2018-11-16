@@ -1,7 +1,7 @@
 #ifndef BATTLESHIP_H
 #define BATTLESHIP_H
 
-#include "Coordinate.h"
+#include "coordinate.h"
 
 class Battleship
 {

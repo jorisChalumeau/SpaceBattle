@@ -3,7 +3,7 @@
 Grid::Grid() {
     for(int i=0;i<10;i++) {
         for(int j=0;j<10;j++) {
-            _table[i][j] = {Coord(j+1),Coord(i+1),UNKOWN};
+            _table[i][j] = {Coord(j+1),Coord(i+1),UNKNOWN};
         }
     }
 }
