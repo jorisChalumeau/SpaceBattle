@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include "grid.h"
 
 int main(int argc, char *argv[])
 {
@@ -8,4 +9,9 @@ int main(int argc, char *argv[])
     w.show();
 
     return a.exec();
+    /*Grid *g1 = new Grid();
+    Grid *g2 = new Grid();
+    g1->display();
+    g2->display();
+    return EXIT_SUCCESS;*/
 }

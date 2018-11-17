@@ -9,10 +9,12 @@ enum Status {MISS = -1, UNKNOWN = 0, HIT = 1};
 class Coordinate
 {
 public:
-    Coord hCoord;
-    Coord vCoord;
-    Status value;
+    Coord _hCoord;
+    Coord _vCoord;
+    Status _value;
     Coordinate(Coord h, Coord v);
+    Coordinate(Coord h, Coord v, Status val);
+    ~Coordinate();
 };
 
 #endif // COORDINATE_H

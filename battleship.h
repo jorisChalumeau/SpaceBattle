@@ -6,7 +6,7 @@
 class Battleship
 {
 public:
-    Battleship(int size, Coordinate start, Coordinate end);
+    explicit Battleship(int size, Coordinate start, Coordinate end);
     ~Battleship();
 
 private:

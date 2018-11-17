@@ -30,13 +30,8 @@ SOURCES += \
     player.cpp \
     grid.cpp \
     coordinate.cpp \
-    Battleship.cpp \
     battleship.cpp \
-    coordinate.cpp \
-    grid.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    player.cpp
+    maingame.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,15 +39,11 @@ HEADERS += \
     player.h \
     grid.h \
     coordinate.h \
-    battleship.h \
-    coordinate.h \
-    grid.h \
-    mainwindow.h \
-    player.h
+    maingame.h
 
 FORMS += \
         mainwindow.ui \
-    mainwindow.ui
+    maingame.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

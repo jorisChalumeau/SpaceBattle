@@ -1,7 +1,15 @@
 #include "coordinate.h"
 
 Coordinate::Coordinate(Coord h, Coord v) {
-    hCoord = h;
-    vCoord = v;
-    value = UNKNOWN;
+    _hCoord = h;
+    _vCoord = v;
+    _value = UNKNOWN;
 }
+
+Coordinate::Coordinate(Coord h, Coord v, Status val) {
+    _hCoord = h;
+    _vCoord = v;
+    _value = val;
+}
+
+Coordinate::~Coordinate() = default;

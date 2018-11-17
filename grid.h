@@ -7,7 +7,7 @@ class Grid
 {
 public:
     Grid();
-    Coordinate _table[10][10];
+    Coordinate *_table[10][10];
     void display();
     ~Grid();
 };
