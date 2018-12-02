@@ -9,6 +9,8 @@ public:
     Grid();
     Coordinate *_table[10][10];
     void display();
+    void fillShipH(Coordinate start, Coordinate end);
+    void fillShipV(Coordinate start, Coordinate end);
     ~Grid();
 };
 

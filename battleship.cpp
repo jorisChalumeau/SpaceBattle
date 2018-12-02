@@ -1,5 +1,6 @@
 #include "battleship.h"
 
-Battleship::Battleship(int size, Coordinate start, Coordinate end) : _size(size), _start(start), _end(end) {}
+Battleship::Battleship(ShipType t, Coordinate start, Coordinate end, std::string dir) : _type(t), _start(start),
+    _end(end), _dir(dir) {}
 
 Battleship::~Battleship() = default;

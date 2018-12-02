@@ -31,7 +31,8 @@ SOURCES += \
     grid.cpp \
     coordinate.cpp \
     battleship.cpp \
-    maingame.cpp
+    maingame.cpp \
+    game.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,7 +40,8 @@ HEADERS += \
     player.h \
     grid.h \
     coordinate.h \
-    maingame.h
+    maingame.h \
+    game.h
 
 FORMS += \
         mainwindow.ui \

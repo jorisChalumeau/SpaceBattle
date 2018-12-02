@@ -1,16 +1,29 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "grid.h"
+#include "battleship.h"
 
 class Player
 {
-public:
-    Player(int numPlayer, Grid ownGrid, Grid enemyGrid);
-    int _numPlayer;
+private:
     Grid _ownGrid;
     Grid _enemyGrid;
-    void shoot(Coord hCoord, Coord vCoord);
+    ShipType _selectedShip;
+    Coordinate _selectedCell;
+
+public:
+    Player(int numPlayer);
+    int _numPlayer;
+    Status shoot(Coord hCoord, Coord vCoord);
+    bool placeShip(ShipType t, Coordinate start, Coordinate end);
+    Grid getOwnGrid();
+    void setOwnGrid(Grid g);
+    Grid getEnemyGrid();
+    void setEnemyGrid(Grid g);
+    ShipType getSelectedShip();
+    void selectShip(ShipType st);
+    Coordinate getSelectedCell();
+    void selectCell(Coordinate c);
     ~Player();
 };
 

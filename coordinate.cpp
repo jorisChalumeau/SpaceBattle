@@ -12,4 +12,11 @@ Coordinate::Coordinate(Coord h, Coord v, Status val) {
     _value = val;
 }
 
+bool Coordinate::isNull()
+{
+    if(_hCoord == NONE || _vCoord == NONE)
+        return true;
+    return false;
+}
+
 Coordinate::~Coordinate() = default;
