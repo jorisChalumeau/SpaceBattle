@@ -10,16 +10,20 @@ Grid::Grid() {
 
 void Grid::display() {
     for(int i=0;i<10;i++) {
-        std::cout << "--------------------\n";
+        std::cout << "---------------------\n";
         for(int j=0;j<10;j++) {
             std::cout << "|" << _table[i][j]->_value;
         }
         std::cout << "|\n";
     }
-    std::cout << "--------------------\n";
+    std::cout << "---------------------\n";
 }
 
-void Grid::fillShipH(Coordinate start, Coordinate end){
+bool Grid::fillShipH(Coordinate start, Coordinate end){
+    for(int i=start._hCoord ; i<=end._hCoord ; i++){
+        if(_table[start._vCoord-1][i-1]->_value == HIDDEN)
+            return false;
+    }
     for(int i=start._hCoord ; i<=end._hCoord ; i++){
         Coord c;
         if(i==1)
@@ -44,11 +48,16 @@ void Grid::fillShipH(Coordinate start, Coordinate end){
             c=J;
         else
             c=NONE;
-        _table[start._vCoord][i] = new Coordinate(c, start._vCoord, HIDDEN);
+        _table[start._vCoord-1][i-1] = new Coordinate(c, start._vCoord, HIDDEN);
     }
+    return true;
 }
 
-void Grid::fillShipV(Coordinate start, Coordinate end){
+bool Grid::fillShipV(Coordinate start, Coordinate end){
+    for(int i=start._vCoord ; i<=end._vCoord ; i++){
+        if(_table[i-1][start._hCoord-1]->_value == HIDDEN)
+            return false;
+    }
     for(int i=start._vCoord ; i<=end._vCoord ; i++){
         Coord c;
         if(i==1)
@@ -73,8 +82,9 @@ void Grid::fillShipV(Coordinate start, Coordinate end){
             c=J;
         else
             c=NONE;
-        _table[i][start._hCoord] = new Coordinate(c, start._vCoord, HIDDEN);
+        _table[i-1][start._hCoord-1] = new Coordinate(c, start._vCoord, HIDDEN);
     }
+    return true;
 }
 
 Grid::~Grid() = default;

@@ -2,39 +2,35 @@
 
 Player::Player(int numPlayer) : _numPlayer(numPlayer), _selectedCell(*new Coordinate(NONE,NONE)), _selectedShip(NOSHIP) {}
 
-Status Player::shoot(Coord hCoord, Coord vCoord) {
-    std::cout << "\nshot in (" << hCoord << "," << vCoord << ")";
-    if(hCoord < A || hCoord > J || vCoord < A || vCoord > J)
-        return MISS;
-    if (_enemyGrid._table[vCoord][hCoord]->_value == UNKNOWN
-            || _enemyGrid._table[vCoord][hCoord]->_value == MISS)
-        _enemyGrid._table[vCoord][hCoord]->_value = MISS; // color white cell
+Status Player::shoot(Coordinate target){
+    if (_enemyGrid._table[target._vCoord-1][target._hCoord-1]->_value != HIDDEN
+            && _enemyGrid._table[target._vCoord-1][target._hCoord-1]->_value != HIT)
+        _enemyGrid._table[target._vCoord-1][target._hCoord-1]->_value = MISS; // color white cell
     else
-        _enemyGrid._table[vCoord][hCoord]->_value = HIT; // color red cell
-    return _enemyGrid._table[vCoord][hCoord]->_value;
+        _enemyGrid._table[target._vCoord-1][target._hCoord-1]->_value = HIT; // color red cell
+    return _enemyGrid._table[target._vCoord-1][target._hCoord-1]->_value;
 }
 
 bool Player::placeShip(ShipType t, Coordinate start, Coordinate end) {
-    if(end._hCoord - start._hCoord == t+1 && end._vCoord - start._vCoord == 0){
-        new Battleship(t, start, end, "h");
-        _ownGrid.fillShipH(start, end);
-        _ownGrid.display();
-        return true;
-    } else if (start._hCoord - end._hCoord == t+1 && start._vCoord - end._vCoord == 0){
-        new Battleship(t, end, start, "h");
-        _ownGrid.fillShipH(end, start);
-        _ownGrid.display();
-        return true;
-    } else if(end._hCoord - start._hCoord == 0 && end._vCoord - start._vCoord == t+1){
-        new Battleship(t, start, end, "v");
-        _ownGrid.fillShipV(start, end);
-        _ownGrid.display();
-        return true;
-    } else if (start._hCoord - end._hCoord == 0 && start._vCoord - end._vCoord == t+1){
-        new Battleship(t, end, start, "v");
-        _ownGrid.fillShipV(end, start);
-        _ownGrid.display();
-        return true;
+    ShipType a = t;
+    if (t==6)
+        a = SUBMARINE;
+    if(end._hCoord - start._hCoord == a-1 && end._vCoord - start._vCoord == 0){
+        if(_ownGrid.fillShipH(start, end))
+            return true;
+        return false;
+    } else if (start._hCoord - end._hCoord == a-1 && start._vCoord - end._vCoord == 0){
+        if(_ownGrid.fillShipH(end, start))
+            return true;
+        return false;
+    } else if(end._hCoord - start._hCoord == 0 && end._vCoord - start._vCoord == a-1){
+        if(_ownGrid.fillShipV(start, end))
+            return true;
+        return false;
+    } else if (start._hCoord - end._hCoord == 0 && start._vCoord - end._vCoord == a-1){
+        if(_ownGrid.fillShipV(end, start))
+            return true;
+        return false;
     }
     return false;
 }

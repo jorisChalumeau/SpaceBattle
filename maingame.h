@@ -5,8 +5,6 @@
 #include <QtWidgets>
 #include "game.h"
 
-enum Phase {POSITIONING, BATTLING};
-
 namespace Ui {
 class MainGame;
 }
@@ -14,22 +12,31 @@ class MainGame;
 class MainGame : public QMainWindow
 {
     Q_OBJECT
-private:
-    Game _game;
+
 public:
-    explicit MainGame(Game g, QWidget *parent = nullptr);
+    explicit MainGame(Game *g, QWidget *parent = nullptr);
     ~MainGame();
     void fillButtons();
     void fillButtonHandlers();
-    void setGame(Game g);
-    void placeShip(Coordinate firstCell, Coordinate newCell);
-    Coordinate getCoord(QPushButton *b);
+    void setGame(Game *g);
+    void placeShipIhm(ShipType t, Coordinate firstCell, Coordinate newCell);
+    void fillShipIhmH(ShipType t, Coordinate start, Coordinate end);
+    void fillShipIhmV(ShipType t, Coordinate start, Coordinate end);
+    void disableShip(ShipType t);
+    QString getColor(ShipType t);
+    void shootIhm(Status res, QPushButton *button);
+    Coordinate getAllyCoord(QPushButton *b);
+    Coordinate getEnemyCoord(QPushButton *b);
 public slots:
     void handleShips();
     void handlePositioning();
     void handleAttack();
 private:
     Ui::MainGame *ui;
+    Game *_game;
+    QPushButton *_ships[6];
+    QPushButton *_ally[10][10];
+    QPushButton *_enemy[10][10];
 };
 
 #endif // MAINGAME_H

@@ -14,7 +14,7 @@ private:
 public:
     Player(int numPlayer);
     int _numPlayer;
-    Status shoot(Coord hCoord, Coord vCoord);
+    Status shoot(Coordinate target);
     bool placeShip(ShipType t, Coordinate start, Coordinate end);
     Grid getOwnGrid();
     void setOwnGrid(Grid g);
