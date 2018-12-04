@@ -3,6 +3,8 @@
 #include <QApplication>
 #include <QTcpSocket>
 
+#include "game.h"
+#include "mainwindow.h"
 #include "dialog.h"
 #include "ui_dialog.h"
 
@@ -54,11 +56,11 @@ dialog::dialog(QWidget *parent) :
 
     //connect(okButton, SIGNAL(clicked()), this, SLOT(checkValues()));
 
-    connect(ui->hostCombo, SIGNAL(editTextChanged()), this, SLOT (enableGetFortuneButton()));
     connect(ui->portLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT (enableGetFortuneButton()));
     //connect(ui->getFortuneButton, SIGNAL(clicked()), this, SLOT(requestNewFortune()));
     connect(ui->getFortuneButton, SIGNAL(clicked()), this, SLOT(connection()));
     connect(ui->boutonEnvoyer, SIGNAL(clicked()), this, SLOT(on_boutonEnvoyer_clicked()));
+    connect(ui->buttonGame, SIGNAL(clicked()), this, SLOT(lanchGamePortal()));
 
     //connect(tcpSocket, &QIODevice::readyRead, this, &dialog::readFortune);
     connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(donneesRecues()));
@@ -183,12 +185,11 @@ void dialog::sessionOpened()
 
 void dialog::connection()
 {
-    // On annonce sur la fen�tre qu'on est en train de se connecter
     ui->listeMessages->append(tr("<em>Tentative de connexion en cours...</em>"));
     ui->getFortuneButton->setEnabled(false);
 
 
-    tcpSocket->abort(); // On d�sactive les connexions pr�c�dentes s'il y en a
+    tcpSocket->abort();
     tcpSocket->connectToHost(ui->hostCombo->currentText(), ui->portLineEdit->text().toInt());
 }
 
@@ -201,7 +202,6 @@ void dialog::on_boutonEnvoyer_clicked()
     QByteArray paquet;
     QDataStream out(&paquet, QIODevice::WriteOnly);
 
-    // On pr�pare le paquet � envoyer
     QString messageAEnvoyer = tr("<strong>") + ui->pseudo->text() +tr("</strong> : ") + ui->message->text();
 
     out << (quint16) 0;
@@ -215,13 +215,11 @@ void dialog::on_boutonEnvoyer_clicked()
 
 }
 
-// Appuyer sur la touche Entr�e a le m�me effet que cliquer sur le bouton "Envoyer"
 void dialog::on_message_returnPressed()
 {
     on_boutonEnvoyer_clicked();
 }
 
-// On a re�u un paquet (ou un sous-paquet)
 void dialog::donneesRecues()
 {
     qDebug() << "test test write message";
@@ -239,15 +237,11 @@ void dialog::donneesRecues()
     if (tcpSocket->bytesAvailable() < sizeMessage)
         return;
 
-
-    // Si on arrive jusqu'� cette ligne, on peut r�cup�rer le message entier
     QString messageRecu;
     in >> messageRecu;
 
-    // On affiche le message sur la zone de Chat
     ui->listeMessages->append(messageRecu);
 
-    // On remet la taille du message � 0 pour pouvoir recevoir de futurs messages
     sizeMessage = 0;
 }
 
@@ -264,6 +258,12 @@ void dialog::deconnecte()
     ui->listeMessages->append(tr("<em>Disconnected</em>"));
 }
 
+// Ce slot est appel� lorsqu'on est d�connect� du serveur
+void dialog::lanchGamePortal()
+{
+    mainW = new MainWindow(); // Be sure to destroy your window somewhere
+    mainW->show();
+}
 
 dialog::~dialog()
 {

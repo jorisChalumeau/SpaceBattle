@@ -7,6 +7,8 @@
 #include <QObject>
 #include <QWidget>
 
+#include "mainwindow.h"
+
 class QComboBox;
 class QLabel;
 class QLineEdit;
@@ -23,7 +25,7 @@ class dialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit dialog(QWidget *parent = nullptr);
+    explicit dialog(QWidget *parent = nullptr);    
     ~dialog();
 
 private slots:
@@ -39,6 +41,7 @@ private slots:
     void donneesRecues();
     void connecte();
     void deconnecte();
+    void lanchGamePortal();
 
 private:
     Ui::dialog *ui;
@@ -49,6 +52,8 @@ private:
 
     QNetworkSession *networkSession = nullptr;
     quint16 sizeMessage;
+    MainWindow *mainW;
+
 
 };
 
