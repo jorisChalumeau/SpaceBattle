@@ -2,7 +2,7 @@
 #define GAME_H
 #include "player.h"
 
-enum Phase {PLACEMENT, BATTLING};
+enum Phase {NEW, WAITING_FOR_PLAYER, WAITING_FOR_LAUNCH, IN_PROGRESS, FINISH};
 
 class Game
 {
