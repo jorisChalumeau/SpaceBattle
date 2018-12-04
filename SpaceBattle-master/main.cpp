@@ -10,6 +10,8 @@ int main(int argc, char *argv[])
     Game *game = new Game(p1, p2);
     MainGame w(game);
     w.show();
+    MainWindow g;
+    g.show();
 
     return a.exec();
 }
