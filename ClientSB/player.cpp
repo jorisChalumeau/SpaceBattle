@@ -16,20 +16,28 @@ bool Player::placeShip(ShipType t, Coordinate start, Coordinate end) {
     if (t==6)
         a = SUBMARINE;
     if(end._hCoord - start._hCoord == a-1 && end._vCoord - start._vCoord == 0){
-        if(_ownGrid.fillShipH(start, end))
+        if(_ownGrid.fillShipH(start, end)){
+            _enemyGrid.fillShipH(start, end);
             return true;
+        }
         return false;
     } else if (start._hCoord - end._hCoord == a-1 && start._vCoord - end._vCoord == 0){
-        if(_ownGrid.fillShipH(end, start))
+        if(_ownGrid.fillShipH(end, start)){
+            _enemyGrid.fillShipH(end, start);
             return true;
+        }
         return false;
     } else if(end._hCoord - start._hCoord == 0 && end._vCoord - start._vCoord == a-1){
-        if(_ownGrid.fillShipV(start, end))
+        if(_ownGrid.fillShipV(start, end)){
+            _enemyGrid.fillShipV(start, end);
             return true;
+        }
         return false;
     } else if (start._hCoord - end._hCoord == 0 && start._vCoord - end._vCoord == a-1){
-        if(_ownGrid.fillShipV(end, start))
+        if(_ownGrid.fillShipV(end, start)){
+            _enemyGrid.fillShipV(end, start);
             return true;
+        }
         return false;
     }
     return false;

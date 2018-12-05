@@ -1,0 +1,16 @@
+INPUT(
+./release\main.o
+./release\dialog.o
+./release\mainwindow.o
+./release\player.o
+./release\grid.o
+./release\coordinate.o
+./release\battleship.o
+./release\maingame.o
+./release\game.o
+./release\creategamescene.o
+./release\moc_dialog.o
+./release\moc_mainwindow.o
+./release\moc_maingame.o
+./release\moc_creategamescene.o
+);

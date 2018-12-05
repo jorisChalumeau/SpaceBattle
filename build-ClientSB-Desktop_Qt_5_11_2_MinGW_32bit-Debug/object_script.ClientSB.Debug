@@ -1,0 +1,16 @@
+INPUT(
+./debug\main.o
+./debug\dialog.o
+./debug\mainwindow.o
+./debug\player.o
+./debug\grid.o
+./debug\coordinate.o
+./debug\battleship.o
+./debug\maingame.o
+./debug\game.o
+./debug\creategamescene.o
+./debug\moc_dialog.o
+./debug\moc_mainwindow.o
+./debug\moc_maingame.o
+./debug\moc_creategamescene.o
+);

@@ -31,10 +31,16 @@ void MainWindow::createGame(){
 
 void MainWindow::joinGame(){
     // join selected game
-    QString txt = ui->comboBox->itemText(ui->comboBox->currentIndex());
+    Player *p1 = new Player(1);
+    Player *p2 = new Player(2);
+    Game *g = new Game(p1, p2);
+    mg = new MainGame(g);
+    mg->show();
+    this->hide();
+    /*QString txt = ui->comboBox->itemText(ui->comboBox->currentIndex());
     if(txt != ""){
         // join game txt
-    }
+    }*/
 }
 
 void MainWindow::openSettings(){

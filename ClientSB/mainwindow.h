@@ -11,6 +11,7 @@
 #include <QMainWindow>
 #include <QComboBox>
 #include "creategamescene.h"
+#include "maingame.h"
 
 class QComboBox;
 class QLabel;
@@ -40,7 +41,7 @@ private:
     QString serverNameVal;
     quint32 serverPortVal;
     QTcpSocket *mainSocket = nullptr;
-
+    MainGame *mg;
 };
 
 #endif // MAINWINDOW_H

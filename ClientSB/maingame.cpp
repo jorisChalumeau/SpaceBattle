@@ -483,6 +483,7 @@ void MainGame::handlePositioning()
             if(p->placeShip(p->getSelectedShip(), p->getSelectedCell(), cell)){
                 placeShipIhm(p->getSelectedShip(), p->getSelectedCell(), cell);
                 p->selectShip(NOSHIP);
+                p->getEnemyGrid().display();
             }
             p->selectCell(*new Coordinate(NONE, NONE));
         }
@@ -657,10 +658,10 @@ void MainGame::handleAttack()
 {
     QPushButton* button = static_cast<QPushButton*>(sender());
     Player *p = _game->getCurrentPlayer();
-    if(_game->getCurrentPhase() == BATTLING){
+    if(_game->getCurrentPhase() == IN_PROGRESS){
         shootIhm(p->shoot(getEnemyCoord(button)), button);
     } else {
-        _game->setCurrentPhase(BATTLING);
+        _game->setCurrentPhase(IN_PROGRESS);
         std::cout << "you first need to place all your ships or it is your opponent's turn";
     }
 }

@@ -162,7 +162,7 @@ void Server::dataReceived()
     in >> message;
 
     if(message.left(10) == "CreateGame"){
-        QStringList liste = message.split(";");
+        /*QStringList liste = message.split(";");
         Game *g = new Game();
         g->setCurrentPhase(NEW);
         g->setName(liste[1]);
@@ -176,7 +176,7 @@ void Server::dataReceived()
             timer->start(45*60*1000);
         else
             timer->start(120*60*1000); // no limit
-        games.append(g);
+        games.append(g);*/
     } else {
         sendAtAll(message);
     }
