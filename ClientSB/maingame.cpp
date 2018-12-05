@@ -660,7 +660,7 @@ void MainGame::handleAttack()
     if(_game->getCurrentPhase() == IN_PROGRESS){
         shootIhm(p->shoot(getEnemyCoord(button)), button);
     } else {
-        _game->setCurrentPhase(IN_PROGRESS);
+        //_game->setCurrentPhase(IN_PROGRESS);
         std::cout << "you first need to place all your ships or it is your opponent's turn";
     }
 }

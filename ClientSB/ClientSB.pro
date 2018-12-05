@@ -22,7 +22,8 @@ SOURCES += \
     coordinate.cpp \
     battleship.cpp \
     maingame.cpp \
-    game.cpp
+    game.cpp \
+    creategamescene.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -37,9 +38,11 @@ HEADERS += \
     grid.h \
     coordinate.h \
     maingame.h \
-    game.h
+    game.h \
+    creategamescene.h
 
 FORMS += \
     dialog.ui \
     mainwindow.ui \
-    maingame.ui
+    maingame.ui \
+    creategamescene.ui

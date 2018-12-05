@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QComboBox>
+#include "creategamescene.h"
 
 namespace Ui {
 class MainWindow;
@@ -13,8 +15,12 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+    void buttonHandlers();
     ~MainWindow();
-
+public slots:
+    void createGame();
+    void joinGame();
+    void openSettings();
 private:
     Ui::MainWindow *ui;
 };
