@@ -27,6 +27,8 @@ public:
     void shootIhm(Status res, QPushButton *button);
     Coordinate getAllyCoord(QPushButton *b);
     Coordinate getEnemyCoord(QPushButton *b);
+    void closeGame();
+
 public slots:
     void handleShips();
     void handlePositioning();

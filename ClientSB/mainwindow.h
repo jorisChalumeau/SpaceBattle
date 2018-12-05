@@ -37,6 +37,7 @@ public slots:
     void openSettings();
 private:
     Ui::MainWindow *ui;
+    CreateGameScene *cgs;
     QString serverNameVal;
     quint32 serverPortVal;
 };

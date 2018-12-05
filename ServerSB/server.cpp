@@ -164,9 +164,31 @@ void Server::dataReceived()
     QString message;
     in >> message;
 
-    sendAtAll(message);
+    if(message.left(10) == "CreateGame"){
+        QStringList liste = message.split(";");
+        Game *g = new Game();
+        g->setCurrentPhase(NEW);
+        g->setName(liste[1]);
+        QTimer *timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), this, SLOT(endOfTimer(socket)));
+        if(liste[2] == "15 min")
+            timer->start(15*60*1000);
+        else if(liste[2] == "30 min")
+            timer->start(30*60*1000);
+        else if(liste[2] == "45 min")
+            timer->start(45*60*1000);
+        else
+            timer->start(120*60*1000); // no limit
+    } else {
+        sendAtAll(message);
+    }
 
     tailleMessage = 0;
+}
+
+void Server::endOfTimer(QTcpSocket *socket){
+    // send the message to close game window
+    socket->write("TimerOver");
 }
 
 void Server::deconnexionClient()

@@ -251,9 +251,11 @@ void dialog::donneesRecues()
 
     qDebug() << messageRecu;
 
-    ui->listeMessages->append(messageRecu);
+    if(messageRecu != "TimerOver"){
+        ui->listeMessages->append(messageRecu);
 
-    sizeMessage = 0;
+        sizeMessage = 0;
+    }
 }
 
 void dialog::connecte()

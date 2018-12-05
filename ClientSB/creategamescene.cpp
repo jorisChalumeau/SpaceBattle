@@ -3,13 +3,13 @@
 
 CreateGameScene::CreateGameScene(QString *serverName, quint32 *serverPort, QWidget *parent) :
     QDialog(parent),
+    _serverName(serverName),
+    _serverPort(serverPort),
     ui(new Ui::CreateGameScene),
     gameSocket(new QTcpSocket(this))
 
 {
     ui->setupUi(this);
-    qDebug() << *serverPort;
-    qDebug() << *serverName;
     buttonHandlers();
 }
 
@@ -53,7 +53,9 @@ void CreateGameScene::cancel(){
 void CreateGameScene::submit(){
     //submit game with defined settings
     gameSocket->abort();
-    //gameSocket->connectToHost();
+    gameSocket->connectToHost(*_serverName, *_serverPort);
+    QString msgToSend = "CreateGame;"+this->name+";"+this->time;
+    gameSocket->write(msgToSend.toStdString().c_str(), msgToSend.length());
 }
 
 CreateGameScene::~CreateGameScene()

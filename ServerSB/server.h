@@ -26,6 +26,7 @@ private slots:
     void dataReceived();
     void deconnexionClient();
     void sendAtAll(const QString &message);
+    void endOfTimer(QTcpSocket *socket);
 
 private:
     QLabel *statusLabel = nullptr;

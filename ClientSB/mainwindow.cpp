@@ -24,8 +24,8 @@ void MainWindow::buttonHandlers(){
 }
 
 void MainWindow::createGame(){
-    CreateGameScene *scene = new CreateGameScene(&serverNameVal, &serverPortVal);
-    scene->show();
+    cgs = new CreateGameScene(&serverNameVal, &serverPortVal);
+    cgs->show();
     this->hide();
 }
 
