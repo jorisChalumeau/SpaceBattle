@@ -1,12 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(QString *serverName, quint32 *serverPort, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
 
+    ui->setupUi(this);
+    serverNameVal = *serverName;
+    serverPortVal = *serverPort;
     buttonHandlers();
 }
 
@@ -22,7 +24,7 @@ void MainWindow::buttonHandlers(){
 }
 
 void MainWindow::createGame(){
-    CreateGameScene *scene = new CreateGameScene();
+    CreateGameScene *scene = new CreateGameScene(&serverNameVal, &serverPortVal);
     scene->show();
     this->hide();
 }

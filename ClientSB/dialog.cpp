@@ -61,6 +61,8 @@ dialog::dialog(QWidget *parent) :
     connect(ui->getFortuneButton, SIGNAL(clicked()), this, SLOT(connection()));
     connect(ui->boutonEnvoyer, SIGNAL(clicked()), this, SLOT(on_boutonEnvoyer_clicked()));
     connect(ui->buttonGame, SIGNAL(clicked()), this, SLOT(lanchGamePortal()));
+    connect(ui->decoButton, SIGNAL(clicked()), this, SLOT(disconnectUser()));
+
 
     //connect(tcpSocket, &QIODevice::readyRead, this, &dialog::readFortune);
     connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(donneesRecues()));
@@ -101,8 +103,7 @@ void dialog::requestNewFortune()
 
     ui->getFortuneButton->setEnabled(false);
     tcpSocket->abort();
-    tcpSocket->connectToHost(ui->hostCombo->currentText(),
-                             ui->portLineEdit->text().toInt());
+    tcpSocket->connectToHost(ui->hostCombo->currentText(), ui->portLineEdit->text().toInt());
 }
 
 void dialog::readFortune()
@@ -188,9 +189,17 @@ void dialog::connection()
     ui->listeMessages->append(tr("<em>Tentative de connexion en cours...</em>"));
     ui->getFortuneButton->setEnabled(false);
 
+    qDebug() << "Verif connection";
+
+    serverPort = ui->portLineEdit->text().toInt();
+    qDebug() << serverPort;
+
+    serverName = ui->hostCombo->currentText();
+    qDebug() << serverName;
+
 
     tcpSocket->abort();
-    tcpSocket->connectToHost(ui->hostCombo->currentText(), ui->portLineEdit->text().toInt());
+    tcpSocket->connectToHost(serverName, serverPort);
 }
 
 // Envoi d'un message au serveur
@@ -211,8 +220,8 @@ void dialog::on_boutonEnvoyer_clicked()
 
     tcpSocket->write(paquet); // On envoie le paquet
 
-    tcpSocket->abort();
-
+    ui->message->clear();
+    ui->message->setFocus();
 }
 
 void dialog::on_message_returnPressed()
@@ -240,19 +249,25 @@ void dialog::donneesRecues()
     QString messageRecu;
     in >> messageRecu;
 
+    qDebug() << messageRecu;
+
     ui->listeMessages->append(messageRecu);
 
     sizeMessage = 0;
 }
 
-// Ce slot est appel� lorsque la connexion au serveur a r�ussi
 void dialog::connecte()
 {
     ui->listeMessages->append(tr("<em>Connectionion succesful !</em>"));
     ui->getFortuneButton->setEnabled(true);
 }
 
-// Ce slot est appel� lorsqu'on est d�connect� du serveur
+
+void dialog::disconnectUser()
+{
+    tcpSocket->abort();
+}
+
 void dialog::deconnecte()
 {
     ui->listeMessages->append(tr("<em>Disconnected</em>"));
@@ -261,7 +276,11 @@ void dialog::deconnecte()
 // Ce slot est appel� lorsqu'on est d�connect� du serveur
 void dialog::lanchGamePortal()
 {
-    mainW = new MainWindow(); // Be sure to destroy your window somewhere
+    qDebug() << serverPort;
+
+    qDebug() << serverName;
+
+    mainW = new MainWindow(&serverName, &serverPort); // Be sure to destroy your window somewhere
     mainW->show();
 }
 

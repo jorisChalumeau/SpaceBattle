@@ -40,6 +40,7 @@ private slots:
     void on_message_returnPressed();
     void donneesRecues();
     void connecte();
+    void disconnectUser();
     void deconnecte();
     void lanchGamePortal();
 
@@ -50,10 +51,12 @@ private:
     QDataStream in;
     QString currentFortune;
 
+    QString serverName;
+    quint32 serverPort;
+
     QNetworkSession *networkSession = nullptr;
     quint16 sizeMessage;
     MainWindow *mainW;
-
 
 };
 

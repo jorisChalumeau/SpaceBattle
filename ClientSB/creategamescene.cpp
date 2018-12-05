@@ -1,12 +1,15 @@
 #include "creategamescene.h"
 #include "ui_creategamescene.h"
 
-CreateGameScene::CreateGameScene(QWidget *parent) :
+CreateGameScene::CreateGameScene(QString *serverName, quint32 *serverPort, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::CreateGameScene)
+    ui(new Ui::CreateGameScene),
+    gameSocket(new QTcpSocket(this))
+
 {
     ui->setupUi(this);
-
+    qDebug() << *serverPort;
+    qDebug() << *serverName;
     buttonHandlers();
 }
 
@@ -49,7 +52,8 @@ void CreateGameScene::cancel(){
 
 void CreateGameScene::submit(){
     //submit game with defined settings
-
+    gameSocket->abort();
+    //gameSocket->connectToHost();
 }
 
 CreateGameScene::~CreateGameScene()

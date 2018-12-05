@@ -91,9 +91,9 @@
   <widget class="QPushButton" name="getFortuneButton">
    <property name="geometry">
     <rect>
-     <x>580</x>
+     <x>500</x>
      <y>140</y>
-     <width>161</width>
+     <width>131</width>
      <height>28</height>
     </rect>
    </property>
@@ -181,6 +181,19 @@
    </property>
    <property name="text">
     <string>Acces game</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="decoButton">
+   <property name="geometry">
+    <rect>
+     <x>653</x>
+     <y>140</y>
+     <width>101</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Disconnect</string>
    </property>
   </widget>
  </widget>

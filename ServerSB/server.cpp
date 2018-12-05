@@ -35,13 +35,7 @@ Server::Server(QWidget *parent)
         sessionOpened();
     }
 
-    fortunes << tr("Ytest")
-             << tr("You've got to think about tomorrow.")
-             << tr("You will be surprised by a loud noise.")
-             << tr("You will feel hungry again in another hour.")
-             << tr("You might have mail.")
-             << tr("You cannot kill time without injuring eternity.")
-             << tr("Computers are not intelligent. They only think they are.");
+
     auto quitButton = new QPushButton(tr("Quit"));
     quitButton->setAutoDefault(false);
     connect(quitButton, &QAbstractButton::clicked, this, &QWidget::close);
@@ -147,6 +141,10 @@ void Server::newConnection()
 void Server::dataReceived()
 {
     QTcpSocket *socket = qobject_cast<QTcpSocket *>(sender());
+    qDebug() << "Socket value";
+    qDebug() << socket;
+
+
     if (socket == 0)
         return;
 

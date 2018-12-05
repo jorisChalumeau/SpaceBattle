@@ -657,10 +657,10 @@ void MainGame::handleAttack()
 {
     QPushButton* button = static_cast<QPushButton*>(sender());
     Player *p = _game->getCurrentPlayer();
-    if(_game->getCurrentPhase() == IN_PROGRESS){
+    if(_game->getCurrentPhase() == BATTLING){
         shootIhm(p->shoot(getEnemyCoord(button)), button);
     } else {
-        //_game->setCurrentPhase(IN_PROGRESS);
+        _game->setCurrentPhase(BATTLING);
         std::cout << "you first need to place all your ships or it is your opponent's turn";
     }
 }

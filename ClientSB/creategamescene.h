@@ -2,6 +2,8 @@
 #define CREATEGAMESCENE_H
 
 #include <QDialog>
+#include <QTcpSocket>
+
 
 namespace Ui {
 class CreateGameScene;
@@ -12,7 +14,7 @@ class CreateGameScene : public QDialog
     Q_OBJECT
 
 public:
-    explicit CreateGameScene(QWidget *parent = nullptr);
+    explicit CreateGameScene(QString *serverName, quint32 *serverPort, QWidget *parent = nullptr);
     ~CreateGameScene();
     void buttonHandlers();
 public slots:
@@ -26,6 +28,8 @@ private:
     QString name;
     QString time;
     bool viewers;
+    QTcpSocket *gameSocket = nullptr;
+
 };
 
 #endif // CREATEGAMESCENE_H
