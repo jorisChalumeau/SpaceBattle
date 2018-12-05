@@ -36,8 +36,7 @@ private slots:
     void sessionOpened();
 
     void connection();
-    void on_boutonEnvoyer_clicked();
-    void on_message_returnPressed();
+    void buttonSendclicked();
     void donneesRecues();
     void connecte();
     void disconnectUser();

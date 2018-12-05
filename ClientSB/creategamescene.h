@@ -14,7 +14,7 @@ class CreateGameScene : public QDialog
     Q_OBJECT
 
 public:
-    explicit CreateGameScene(QString *serverName, quint32 *serverPort, QWidget *parent = nullptr);
+    explicit CreateGameScene(QTcpSocket *tcpSocket, QWidget *parent = nullptr);
     ~CreateGameScene();
     void buttonHandlers();
 public slots:

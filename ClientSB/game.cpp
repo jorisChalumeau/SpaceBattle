@@ -1,8 +1,6 @@
 #include "game.h"
 
-Game::Game(Player *p1, Player *p2) : _player1(p1), _player2(p2), _currentPhase(WAITING_FOR_LAUNCH), _numCurrPlayer(1) {}
-
-Game::Game() : _currentPhase(NEW), _numCurrPlayer(1) {}
+Game::Game(Player *p1, Player *p2) : _player1(p1), _player2(p2), _currentPhase(PLACEMENT), _numCurrPlayer(1) {}
 
 void Game::switchPlayer(){
     if(this->_numCurrPlayer == 0 || this->_numCurrPlayer==2)
@@ -23,12 +21,4 @@ Phase Game::getCurrentPhase(){
 
 void Game::setCurrentPhase(Phase p){
     _currentPhase = p;
-}
-
-QString Game::getName(){
-    return _name;
-}
-
-void Game::setName(QString n){
-    _name = n;
 }

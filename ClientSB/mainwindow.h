@@ -28,7 +28,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QString *serverName, quint32 *serverPort, QWidget *parent = nullptr);
+    explicit MainWindow(QTcpSocket *tcpSocket, QWidget *parent = nullptr);
     void buttonHandlers();
     ~MainWindow();
 public slots:
@@ -37,9 +37,10 @@ public slots:
     void openSettings();
 private:
     Ui::MainWindow *ui;
-    CreateGameScene *cgs;
     QString serverNameVal;
     quint32 serverPortVal;
+    QTcpSocket *mainSocket = nullptr;
+
 };
 
 #endif // MAINWINDOW_H

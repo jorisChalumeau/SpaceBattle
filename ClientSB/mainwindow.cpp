@@ -1,14 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QString *serverName, quint32 *serverPort, QWidget *parent) :
+MainWindow::MainWindow(QTcpSocket *tcpSocket, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
-{
 
+{
+    mainSocket = tcpSocket;
     ui->setupUi(this);
-    serverNameVal = *serverName;
-    serverPortVal = *serverPort;
+
     buttonHandlers();
 }
 
@@ -24,8 +24,8 @@ void MainWindow::buttonHandlers(){
 }
 
 void MainWindow::createGame(){
-    cgs = new CreateGameScene(&serverNameVal, &serverPortVal);
-    cgs->show();
+    CreateGameScene *scene = new CreateGameScene(mainSocket);
+    scene->show();
     this->hide();
 }
 

@@ -141,9 +141,6 @@ void Server::newConnection()
 void Server::dataReceived()
 {
     QTcpSocket *socket = qobject_cast<QTcpSocket *>(sender());
-    qDebug() << "Socket value";
-    qDebug() << socket;
-
 
     if (socket == 0)
         return;
@@ -179,16 +176,12 @@ void Server::dataReceived()
             timer->start(45*60*1000);
         else
             timer->start(120*60*1000); // no limit
+        games.append(g);
     } else {
         sendAtAll(message);
     }
 
     tailleMessage = 0;
-}
-
-void Server::endOfTimer(QTcpSocket *socket){
-    // send the message to close game window
-    socket->write("TimerOver");
 }
 
 void Server::deconnexionClient()

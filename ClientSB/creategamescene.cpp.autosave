@@ -50,22 +50,9 @@ void CreateGameScene::cancel(){
 
 void CreateGameScene::submit(){
     //submit game with defined settings
-    QByteArray paquet;
-    QDataStream out(&paquet, QIODevice::WriteOnly);
-
-    QString messageAEnvoyer = tr("<strong> Ceci est un test </strong> : Mais c'est bien aussi");
-
-    out << (quint16) 0;
-    out << messageAEnvoyer;
-    out.device()->seek(0);
-    out << (quint16) (paquet.size() - sizeof(quint16));
-    qDebug() << "paquet value";
-    qDebug() << paquet;
-
-    gameSocket->write(paquet); // On envoie le paquet
-    //gameSocket->);
+    QString msgToSend = "CreateGame;"+this->name+";"+this->time;
+    gameSocket->write(msgToSend.toStdString().c_str(), msgToSend.length());
 }
-
 CreateGameScene::~CreateGameScene()
 {
     delete ui;
