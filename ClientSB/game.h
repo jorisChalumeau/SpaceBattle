@@ -2,6 +2,7 @@
 #define GAME_H
 #include "player.h"
 #include <QString>
+#include <QTimer>
 
 enum Phase {NEW, WAITING_FOR_PLAYERS, WAITING_FOR_LAUNCH, IN_PROGRESS, FINISH};
 
@@ -13,6 +14,7 @@ private:
     int _numCurrPlayer;
     Phase _currentPhase;
     QString _name;
+    QTimer _timer;
 
 public:
     explicit Game(Player *p1, Player *p2);
@@ -22,7 +24,10 @@ public:
     Phase getCurrentPhase();
     void setCurrentPhase(Phase p);
     QString getName();
-    void setName(QString p);
+    void setName(QString n);
+    /*QTimer getTimer();
+    void setTimer(QTimer t);*/
+
 };
 
 #endif // GAME_H

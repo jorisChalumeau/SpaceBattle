@@ -3,6 +3,8 @@
 #include <QtCore>
 
 #include "server.h"
+#include "../ClientSB/game.h"
+#include "../ClientSB/game.cpp"
 
 Server::Server(QWidget *parent)
     : QDialog(parent)
@@ -162,11 +164,14 @@ void Server::dataReceived()
     in >> message;
 
     if(message.left(10) == "CreateGame"){
-        /*QStringList liste = message.split(";");
+        qDebug() << "games test when create";
+
+        QStringList liste = message.split(";");
+
         Game *g = new Game();
         g->setCurrentPhase(NEW);
         g->setName(liste[1]);
-        QTimer *timer = new QTimer(this);
+        /*QTimer *timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(endOfTimer(socket)));
         if(liste[2] == "15 min")
             timer->start(15*60*1000);
@@ -175,13 +180,57 @@ void Server::dataReceived()
         else if(liste[2] == "45 min")
             timer->start(45*60*1000);
         else
-            timer->start(120*60*1000); // no limit
-        games.append(g);*/
+            timer->start(120*60*1000); // no limit*/
+        games.append(g);
+        //QString Send = tr("<strong>") + ui->pseudo->text() +tr("</strong> : ") + ui->message->text();
+        nbGames = games.length();
+        qint16 i = 0;
+        while (i < nbGames) {
+            qDebug() << games[i]->getName();
+            i += 1;
+        }
+
+        QString openNewGame = tr("OpenGame;") + g->getName();
+        QString AddNewGame = tr("AddGame;") + g->getName();
+
+        qDebug() << openNewGame;
+
+        QTcpSocket *socketGame = qobject_cast<QTcpSocket *>(sender());
+        qDebug() << socketGame;
+        if (socket == 0)
+            return;
+
+        QByteArray paquet;
+        QDataStream out(&paquet, QIODevice::WriteOnly);
+        out.setVersion(QDataStream::Qt_5_10);
+
+        out << (quint16) 0;
+        out << openNewGame;
+        out.device()->seek(0);
+        out << (quint16) (paquet.size() - sizeof(quint16));
+
+        for (int i = 0; i < clients.size(); i++)
+        {
+            if (clients[i] == socketGame){
+                qDebug() << openNewGame.left(8);
+                clients[i]->write(paquet);
+            }
+        }
+
+        sendAtAll(AddNewGame);
+
+        //std::array<int, 3> a2 = {1, 2, 3};
+        //sendAtAll()
     } else {
         sendAtAll(message);
     }
 
     tailleMessage = 0;
+}
+
+void Server::endOfTimer(QTcpSocket *socket){
+    // send the message to close game window
+    socket->write("TimerOver");
 }
 
 void Server::deconnexionClient()

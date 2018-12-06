@@ -11,7 +11,6 @@
 #include <QMainWindow>
 #include <QComboBox>
 #include "creategamescene.h"
-#include "maingame.h"
 
 class QComboBox;
 class QLabel;
@@ -36,12 +35,14 @@ public slots:
     void createGame();
     void joinGame();
     void openSettings();
+    void addGame();
 private:
     Ui::MainWindow *ui;
     QString serverNameVal;
     quint32 serverPortVal;
     QTcpSocket *mainSocket = nullptr;
-    MainGame *mg;
+    quint16 sizeMessage;
+
 };
 
 #endif // MAINWINDOW_H

@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QTcpSocket>
 
+#include "maingame.h"
+
 
 namespace Ui {
 class CreateGameScene;
@@ -29,6 +31,7 @@ private:
     QString time;
     bool viewers;
     QTcpSocket *gameSocket = nullptr;
+    quint16 sizeMessage;
 
 };
 

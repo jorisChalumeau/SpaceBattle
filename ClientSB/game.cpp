@@ -2,7 +2,9 @@
 
 Game::Game(Player *p1, Player *p2) : _player1(p1), _player2(p2), _currentPhase(WAITING_FOR_LAUNCH), _numCurrPlayer(1) {}
 
-Game::Game() : _currentPhase(NEW), _numCurrPlayer(1) {}
+Game::Game() : _numCurrPlayer(1), _currentPhase(NEW) {}
+
+//Game::Game() {}
 
 void Game::switchPlayer(){
     if(this->_numCurrPlayer == 0 || this->_numCurrPlayer==2)
@@ -32,4 +34,13 @@ QString Game::getName(){
 void Game::setName(QString n){
     _name = n;
 }
+
+/*QTimer Game::getTimer(){
+    return _timer;
+}
+
+void Game::setTimer(QTimer t){
+    _timer = t;
+}*/
+
 

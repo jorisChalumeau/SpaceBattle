@@ -7,6 +7,7 @@
 #include <QTcpSocket>
 
 #include "../ClientSB/game.h"
+#include "../ClientSB/player.h"
 
 class QLabel;
 class QTcpServer;
@@ -26,6 +27,7 @@ private slots:
     void dataReceived();
     void deconnexionClient();
     void sendAtAll(const QString &message);
+    void endOfTimer(QTcpSocket *socket);
 
 private:
     QLabel *statusLabel = nullptr;
@@ -34,6 +36,7 @@ private:
     QNetworkSession *networkSession = nullptr;
     QList<QTcpSocket *> clients;
     QVector<Game *> games;
+    qint16 nbGames;
     quint16 tailleMessage;
 };
 

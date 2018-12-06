@@ -29,7 +29,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Select a game in the list below then join the game</string>
+     <string>List of games Started</string>
     </property>
    </widget>
    <widget class="QPushButton" name="joinGameButton">
@@ -71,13 +71,13 @@
      <string>Settings</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QTextEdit" name="listGames">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>110</y>
-      <width>291</width>
-      <height>22</height>
+      <width>381</width>
+      <height>251</height>
      </rect>
     </property>
    </widget>
@@ -88,7 +88,7 @@
      <x>0</x>
      <y>0</y>
      <width>776</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

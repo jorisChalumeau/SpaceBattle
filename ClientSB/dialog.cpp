@@ -244,9 +244,25 @@ void dialog::donneesRecues()
 
     qDebug() << messageRecu;
 
-    ui->listeMessages->append(messageRecu);
+    if(messageRecu != "TimerOver" && messageRecu.left(8) != "OpenGame" && messageRecu.left(7) != "AddGame"){
+        ui->listeMessages->append(messageRecu);
 
-    sizeMessage = 0;
+        sizeMessage = 0;
+    } else if (messageRecu.left(8) == "OpenGame"){
+        qDebug() << "test rendre dans open game";
+
+        QStringList liste = messageRecu.split(";");
+
+        Player *p1 = new Player(1);
+        Player *p2 = new Player(2);
+        Game *game = new Game(p1, p2);
+        game->setCurrentPhase(NEW);
+        game->setName(liste[1]);
+        MainGame *w = new MainGame(game);
+        w->show();
+
+        sizeMessage = 0;
+    }
 }
 
 void dialog::connecte()

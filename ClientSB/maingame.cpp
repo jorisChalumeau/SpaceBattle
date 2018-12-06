@@ -7,6 +7,8 @@ MainGame::MainGame(Game *g, QWidget *parent) :
     ui(new Ui::MainGame)
 {
     ui->setupUi(this);
+    ui->GameNameView->setText(g->getName());
+
 
     fillButtons();
     fillButtonHandlers();
@@ -483,7 +485,6 @@ void MainGame::handlePositioning()
             if(p->placeShip(p->getSelectedShip(), p->getSelectedCell(), cell)){
                 placeShipIhm(p->getSelectedShip(), p->getSelectedCell(), cell);
                 p->selectShip(NOSHIP);
-                p->getEnemyGrid().display();
             }
             p->selectCell(*new Coordinate(NONE, NONE));
         }
